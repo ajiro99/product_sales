@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    title　ProductSales
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    meta charset="UTF-8"
+
+  body
+    header
+      div
+        nav.z-depth-3
+          div.nav-wrapper.container
+            = link_to '転売ヤー', bodies_path, { :class => "brand-logo", data: {"turbolinks" => false} }
+            /ul#nav-mobile.right.hide-on-med-and-down
+              /li
+                = link_to 'games', admin_games_path
+              /li
+                = link_to 'results', admin_results_path
+              /li
+                = link_to 'goal_patterns', admin_goal_patterns_path
+              /li
+                = link_to 'goal_against_patterns', admin_goal_against_patterns_path
+
+    div.container
+      == yield
+
+= javascript_include_tag 'materialize', 'data-turbolinks-track': 'reload'

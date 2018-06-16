@@ -1,0 +1,58 @@
+= form_for @stocking do |f|
+  - if @stocking.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@stocking.errors.count, "error")} prohibited this stocking from being saved:"
+      ul
+        - @stocking.errors.full_messages.each do |message|
+          li = message
+
+  .row
+    .col.m4
+      = f.label :purchase_date
+      = f.date_field :purchase_date
+    .col.m4
+      = f.label :product_type
+      = f.select :product_type, Stocking.product_type.options
+
+  = f.fields_for :stocking_products do |stocking_products_form|
+    .row
+      - if stocking_products_form.index == 0
+        .col.m4
+          = stocking_products_form.label :body
+          = stocking_products_form.collection_select :product_id, Body.all, :id, :name, include_blank: true
+      - else
+        .col.m4
+          = stocking_products_form.label :lense
+          = stocking_products_form.collection_select :product_id, Lense.all, :id, :name, include_blank: true
+
+      .col.m4
+        = stocking_products_form.label :estimated_price
+        = stocking_products_form.number_field :estimated_price
+      .col.m4
+        = stocking_products_form.label :stock
+        = stocking_products_form.number_field :stock
+
+  .row
+    .col.m4
+      = f.label :purchase_price
+      = f.number_field :purchase_price
+    .col.m4
+      = f.label :shipping_cost
+      = f.number_field :shipping_cost
+    .col.m4
+      = f.label :use_points
+      = f.number_field :use_points
+    /.field
+      = f.label :purchasing_cost
+      = f.number_field :purchasing_cost
+    .col.m4
+      = f.label :payment_type
+      = f.select :payment_type, Stocking.payment_type.options
+    .col.m4
+      = f.label :purchase_place
+      = f.select :purchase_place, Stocking.purchase_place.options
+  .row
+    .col.m4
+      = f.label :remarks
+      = f.text_area :remarks
+  .actions = f.submit

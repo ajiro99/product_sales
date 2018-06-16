@@ -10,13 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_16_065046) do
+ActiveRecord::Schema.define(version: 2018_06_16_124256) do
 
   create_table "products", force: :cascade do |t|
     t.string "type"
     t.integer "maker"
     t.string "name"
     t.integer "color"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stocking_products", force: :cascade do |t|
+    t.integer "stocking_id"
+    t.integer "product_id"
+    t.integer "estimated_price"
+    t.integer "stock"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_stocking_products_on_product_id"
+    t.index ["stocking_id"], name: "index_stocking_products_on_stocking_id"
+  end
+
+  create_table "stockings", force: :cascade do |t|
+    t.date "purchase_date"
+    t.integer "product_type"
+    t.integer "purchase_price"
+    t.integer "shipping_cost"
+    t.integer "use_points"
+    t.integer "purchasing_cost"
+    t.integer "payment_type"
+    t.integer "purchase_place"
+    t.string "remarks"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

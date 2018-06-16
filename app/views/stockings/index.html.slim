@@ -1,0 +1,35 @@
+h1 Listing stockings
+
+table.striped
+  thead
+    tr
+      th Purchase date
+      th Product type
+      th Purchase price
+      th Shipping cost
+      th Use points
+      th Payment type
+      th Purchase place
+      th Remarks
+      th
+      th
+      th
+
+  tbody
+    - @stockings.each do |stocking|
+      tr
+        td = stocking.purchase_date
+        td = stocking.product_type
+        td = stocking.purchase_price
+        td = stocking.shipping_cost
+        td = stocking.use_points
+        td = stocking.payment_type
+        td = stocking.purchase_place
+        td = stocking.remarks
+        td = link_to 'Show', stocking
+        td = link_to 'Edit', edit_stocking_path(stocking)
+        td = link_to 'Destroy', stocking, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Stocking', new_stocking_path

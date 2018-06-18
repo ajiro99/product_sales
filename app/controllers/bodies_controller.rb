@@ -19,7 +19,6 @@ class BodiesController < ApplicationController
   # POST /bodies
   # POST /bodies.json
   def create
-    binding.pry
     @body = Body.new(body_params)
 
     respond_to do |format|

@@ -1,0 +1,78 @@
+= form_for @sale do |f|
+  - if @sale.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@sale.errors.count, "error")} prohibited this sale from being saved:"
+      ul
+        - @sale.errors.full_messages.each do |message|
+          li = message
+
+  .row
+    .col.m4
+      = f.label :sales_date
+      = f.date_field :sales_date
+    .col.m4
+      = f.label :product_type
+      = f.select :product_type, Sale.product_type.options
+  = f.fields_for :sale_products do |sale_products_form|
+      - if sale_products_form.index == 0
+        .col.m4
+          = sale_products_form.label :body
+          = sale_products_form.collection_select :product_id, StockingProduct.joins(:product).where('products.type = ?', "Body"), :id, :product_name, include_blank: true
+      - else
+        .col.m4
+          = sale_products_form.label :lense
+          = sale_products_form.collection_select :product_id, StockingProduct.joins(:product).where('products.type = ?', "Lense"), :id, :product_name, include_blank: true
+
+
+
+
+  /.row
+    .col.m10
+      = f.label :body
+      = select_tag 'select_body', options_from_collection_for_select(StockingProduct.joins(:product).where('products.type = ?', "Body"), :id, :product_name), include_blank: true
+  /.row
+    .col.m10
+      = f.label :lense1
+      = select_tag 'select_lense1', options_from_collection_for_select(StockingProduct.joins(:product).where('products.type = ?', "Lense"), :id, :product_name), include_blank: true
+  /.row
+    .col.m10
+      = f.label :lense2
+      = select_tag 'select_lense2', options_from_collection_for_select(StockingProduct.joins(:product).where('products.type = ?', "Lense"), :id, :product_name), include_blank: true
+  .row
+    .col.m3
+      = f.label :stocking_price
+      = f.number_field :stocking_price
+    .col.m3
+      = f.label :bonus_price
+      = f.number_field :bonus_price
+    .col.m3
+      = f.label :cost
+      = f.number_field :cost
+  .row
+    .col.m3
+      = f.label :selling_price
+      = f.number_field :selling_price
+    .col.m3
+      = f.label :fee
+      = f.number_field :fee
+    .col.m3
+      = f.label :shipping_cost
+      = f.number_field :shipping_cost
+    .col.m3
+      = f.label :sales
+      = f.number_field :sales
+    .col.m3
+      = f.label :profit
+      = f.number_field :profit
+    .col.m3
+      = f.label :profit_rate
+      = f.text_field :profit_rate
+  .row
+    .col.m4
+      = f.label :status
+      = f.select :status, Sale.status.options
+  .row
+    .col.m4
+      = f.label :remarks
+      = f.text_area :remarks
+  .actions = f.submit

@@ -1,0 +1,43 @@
+h1 Listing sales
+
+table
+  thead
+    tr
+      th Sales date
+      th Product type
+      th Stocking price
+      th Bonus price
+      th Cost
+      th Selling price
+      th Fee
+      th Shipping cost
+      th Profit
+      th Profit rate
+      th Status
+      th Remarks
+      th
+      th
+      th
+
+  tbody
+    - @sales.each do |sale|
+      tr
+        td = sale.sales_date
+        td = sale.product_type
+        td = sale.stocking_price
+        td = sale.bonus_price
+        td = sale.cost
+        td = sale.selling_price
+        td = sale.fee
+        td = sale.shipping_cost
+        td = sale.profit
+        td = sale.profit_rate
+        td = sale.status
+        td = sale.remarks
+        td = link_to 'Show', sale
+        td = link_to 'Edit', edit_sale_path(sale)
+        td = link_to 'Destroy', sale, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Sale', new_sale_path

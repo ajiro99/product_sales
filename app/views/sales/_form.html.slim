@@ -14,12 +14,13 @@
       = f.label :product_type
       = f.select :product_type, Sale.product_type.options
   = f.fields_for :sale_products do |sale_products_form|
+    .row
       - if sale_products_form.index == 0
-        .col.m4
+        .col.m7
           = sale_products_form.label :body
           = sale_products_form.collection_select :product_id, StockingProduct.joins(:product).where('products.type = ?', "Body"), :id, :product_name, include_blank: true
       - else
-        .col.m4
+        .col.m7
           = sale_products_form.label :lense
           = sale_products_form.collection_select :product_id, StockingProduct.joins(:product).where('products.type = ?', "Lense"), :id, :product_name, include_blank: true
 

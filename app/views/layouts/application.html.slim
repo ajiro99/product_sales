@@ -14,7 +14,7 @@ html
     header
       div
         nav.z-depth-3
-          div.nav-wrapper.container
+          .nav-wrapper.container
             = link_to 'カメラ転売管理', bodies_path, { :class => "brand-logo", data: {"turbolinks" => false} }
             ul#nav-mobile.right.hide-on-med-and-down
               li
@@ -26,7 +26,8 @@ html
               li
                 = link_to '販売', sales_path
 
-    div.container
-      == yield
+    .container
+      .card-panel.hoverable.z-depth-5
+        == yield
 
 = javascript_include_tag 'materialize', 'data-turbolinks-track': 'reload'

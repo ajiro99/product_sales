@@ -16,3 +16,8 @@
 @import "materialize/components/color";
 $primary-color: color("blue", "lighten-2") !default;
 @import 'materialize';
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 96%;
+}

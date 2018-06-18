@@ -39,6 +39,10 @@ $(function() {
     $("#sale_cost").val(parseInt($("#sale_stocking_price").val()) + parseInt($("#sale_bonus_price").val())).change();
   });
 
+  $(document).on('keyup', "#sale_stocking_price", function (){
+    $("#sale_cost").val(parseInt($("#sale_stocking_price").val()) + parseInt($("#sale_bonus_price").val())).change();
+  });
+
   $(document).on('keyup', "#sale_bonus_price", function (){
     $("#sale_cost").val(parseInt($("#sale_stocking_price").val()) + parseInt($("#sale_bonus_price").val())).change();
   });

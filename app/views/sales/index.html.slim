@@ -1,16 +1,19 @@
 h1 Listing sales
 
-table
+table.striped
   thead
     tr
       th Sales date
       th Product type
+      th Maker
+      th Product name
       th Stocking price
       th Bonus price
       th Cost
       th Selling price
       th Fee
       th Shipping cost
+      th Sales
       th Profit
       th Profit rate
       th Status
@@ -24,14 +27,17 @@ table
       tr
         td = sale.sales_date
         td = sale.product_type
-        td = sale.stocking_price
-        td = sale.bonus_price
-        td = sale.cost
-        td = sale.selling_price
-        td = sale.fee
-        td = sale.shipping_cost
-        td = sale.profit
-        td = sale.profit_rate
+        td = sale.maker
+        td = sale.product_name
+        td.right-align = sale.stocking_price.to_s(:delimited)
+        td.right-align = sale.bonus_price.to_s(:delimited)
+        td.right-align.blue-text = sale.cost.to_s(:delimited)
+        td.right-align = sale.selling_price.to_s(:delimited)
+        td.right-align = sale.fee.to_s(:delimited)
+        td.right-align = sale.shipping_cost.to_s(:delimited)
+        td.right-align.blue-text = sale.sales.to_s(:delimited)
+        td.right-align.red-text = sale.profit.to_s(:delimited)
+        td.right-align.red-text = sale.profit_rate.to_s(:delimited)
         td = sale.status
         td = sale.remarks
         td = link_to 'Show', sale

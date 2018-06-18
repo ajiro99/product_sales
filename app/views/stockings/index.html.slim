@@ -1,13 +1,16 @@
-h1 Listing stockings
+h5 Listing stockings
 
 table.striped
   thead
     tr
       th Purchase date
       th Product type
+      th Maker
+      th Product name
       th Purchase price
       th Shipping cost
       th Use points
+      th Purchasing cost
       th Payment type
       th Purchase place
       th Remarks
@@ -20,10 +23,12 @@ table.striped
       tr
         td = stocking.purchase_date
         td = stocking.product_type
-        td = stocking.purchase_price
-        td = stocking.shipping_cost
-        td = stocking.use_points
-        td = stocking.purchasing_cost
+        td = stocking.maker
+        td = stocking.product_name
+        td.right-align = stocking.purchase_price.to_s(:delimited)
+        td.right-align = stocking.shipping_cost.to_s(:delimited)
+        td.right-align = stocking.use_points.to_s(:delimited)
+        td.right-align.red-text = stocking.purchasing_cost.to_s(:delimited)
         td = stocking.payment_type
         td = stocking.purchase_place
         td = stocking.remarks

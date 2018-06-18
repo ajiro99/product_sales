@@ -19,18 +19,18 @@
       - if stocking_products_form.index == 0
         .col.m4
           = stocking_products_form.label :body
-          = stocking_products_form.collection_select :product_id, Body.all, :id, :name, include_blank: true
+          = stocking_products_form.collection_select :product_id, Body.all, :id, :product_name, include_blank: true
       - else
         .col.m4
           = stocking_products_form.label :lense
-          = stocking_products_form.collection_select :product_id, Lense.all, :id, :name, include_blank: true
+          = stocking_products_form.collection_select :product_id, Lense.all, :id, :product_name, include_blank: true
 
       .col.m4
         = stocking_products_form.label :estimated_price
         = stocking_products_form.number_field :estimated_price
       .col.m4
         = stocking_products_form.label :stock
-        = stocking_products_form.number_field :stock
+        = stocking_products_form.select :stock, StockingProduct.stock.options, include_blank: true
 
   .row
     .col.m4

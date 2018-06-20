@@ -20,13 +20,15 @@ class StockingsController < ApplicationController
 
   # GET /stockings/1/edit
   def edit
+    @stocking = Stocking.find(params[:id])
+    t = 3 - @stocking.stocking_products.size.to_i
+    t.times{ @stocking.stocking_products.build }
   end
 
   # POST /stockings
   # POST /stockings.json
   def create
     @stocking = Stocking.new(stocking_params)
-    @stocking.set_purchasing_cost
 
     respond_to do |format|
       if @stocking.save
@@ -43,7 +45,7 @@ class StockingsController < ApplicationController
   # PATCH/PUT /stockings/1.json
   def update
     respond_to do |format|
-      if @stocking.update(stocking_params)
+      if @stocking.update(update_stocking_params)
         format.html { redirect_to @stocking, notice: 'Stocking was successfully updated.' }
         format.json { render :show, status: :ok, location: @stocking }
       else
@@ -75,6 +77,14 @@ class StockingsController < ApplicationController
         permit(:purchase_date, :product_type, :purchase_price, :shipping_cost,
           :use_points, :payment_type, :purchase_place, :remarks,
           stocking_products_attributes: [:product_id, :estimated_price, :stock]
+        )
+    end
+
+    def update_stocking_params
+      params.require(:stocking).
+        permit(:purchase_date, :product_type, :purchase_price, :shipping_cost,
+          :use_points, :purchasing_cost, :payment_type, :purchase_place, :remarks,
+          stocking_products_attributes: [:product_id, :estimated_price, :stock, :_destroy, :id]
         )
     end
 end

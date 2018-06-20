@@ -36,7 +36,7 @@ class LensesController < ApplicationController
   # PATCH/PUT /lenses/1.json
   def update
     respond_to do |format|
-      if @lense.update(lens_params)
+      if @lense.update(lense_params)
         format.html { redirect_to lenses_path, notice: 'Lense was successfully updated.' }
         format.json { render :show, status: :ok, location: @lense }
       else

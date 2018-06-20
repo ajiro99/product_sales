@@ -23,25 +23,25 @@ ActiveRecord::Schema.define(version: 2018_06_18_124256) do
 
   create_table "sale_products", force: :cascade do |t|
     t.integer "sale_id"
-    t.integer "product_id"
+    t.integer "stocking_product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_sale_products_on_product_id"
     t.index ["sale_id"], name: "index_sale_products_on_sale_id"
+    t.index ["stocking_product_id"], name: "index_sale_products_on_stocking_product_id"
   end
 
   create_table "sales", force: :cascade do |t|
     t.date "sales_date"
     t.integer "product_type"
-    t.integer "stocking_price", default: 0
-    t.integer "bonus_price", default: 0
-    t.integer "cost", default: 0
-    t.integer "selling_price", default: 0
-    t.integer "fee", default: 0
-    t.integer "shipping_cost", default: 0
-    t.integer "sales", default: 0
-    t.integer "profit", default: 0
-    t.decimal "profit_rate", precision: 5, scale: 2, default: "0.0"
+    t.integer "stocking_price"
+    t.integer "bonus_price"
+    t.integer "cost"
+    t.integer "selling_price"
+    t.integer "fee"
+    t.integer "shipping_cost"
+    t.integer "sales"
+    t.integer "profit"
+    t.decimal "profit_rate", precision: 5, scale: 2
     t.integer "status"
     t.string "remarks"
     t.datetime "created_at", null: false
@@ -62,10 +62,10 @@ ActiveRecord::Schema.define(version: 2018_06_18_124256) do
   create_table "stockings", force: :cascade do |t|
     t.date "purchase_date"
     t.integer "product_type"
-    t.integer "purchase_price", default: 0
-    t.integer "shipping_cost", default: 0
-    t.integer "use_points", default: 0
-    t.integer "purchasing_cost", default: 0
+    t.integer "purchase_price"
+    t.integer "shipping_cost"
+    t.integer "use_points"
+    t.integer "purchasing_cost"
     t.integer "payment_type"
     t.integer "purchase_place"
     t.string "remarks"

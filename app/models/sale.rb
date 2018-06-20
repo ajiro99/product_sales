@@ -7,10 +7,10 @@ class Sale < ApplicationRecord
   enumerize :status, in: { 販売予定: 1, 販売中: 2, 一時停止: 3, 売り切れ: 4, 削除:0 }, scope: true
 
   def maker
-    sale_products.first&.product&.maker
+    sale_products.first&.stocking_product&.product&.maker
   end
 
   def product_name
-    sale_products.map { |sale_product| sale_product&.product&.name}.join(' / ')
+    sale_products.map { |sale_product| sale_product&.stocking_product&.product&.name}.join(' / ')
   end
 end

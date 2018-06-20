@@ -7,10 +7,6 @@ class Stocking < ApplicationRecord
   enumerize :payment_type, in: { Yahoo: 1, P_One: 2, Amex: 3, 現金:0 }, scope: true
   enumerize :purchase_place, in: { ヤフオク: 1, メルカリ: 2, ソフマップ: 20, ハードオフ:21, アキバU_shop:22 }, scope: true
 
-  def set_purchasing_cost
-    self.purchasing_cost = purchase_price + shipping_cost - use_points
-  end
-
   def maker
     stocking_products.first&.product&.maker
   end

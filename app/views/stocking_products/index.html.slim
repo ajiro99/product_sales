@@ -1,0 +1,25 @@
+h5 Listing stocking_products
+
+table.striped
+  thead
+    tr
+      th purchase_date
+      th product_type
+      th maker
+      th name
+      th color
+      th estimated_price
+      th purchase place
+      th stock
+
+  tbody
+    - @stocking_products.each do |stocking_product|
+      tr
+        td = stocking_product.stocking.purchase_date
+        td = stocking_product.product.type
+        td = stocking_product.product.maker
+        td = stocking_product.product.name
+        td = stocking_product.product.color
+        td.right-align = stocking_product.estimated_price&.to_s(:delimited)
+        td = stocking_product.stocking.purchase_place
+        td = stocking_product.stock

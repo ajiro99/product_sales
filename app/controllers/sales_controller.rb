@@ -29,6 +29,7 @@ class SalesController < ApplicationController
 
     respond_to do |format|
       if @sale.save
+        update_stock(@sale)
         format.html { redirect_to @sale, notice: 'Sale was successfully created.' }
         format.json { render :show, status: :created, location: @sale }
       else
@@ -42,7 +43,8 @@ class SalesController < ApplicationController
   # PATCH/PUT /sales/1.json
   def update
     respond_to do |format|
-      if @sale.update(sale_params)
+      if @sale.update(update_sale_params)
+        update_stock(@sale)
         format.html { redirect_to @sale, notice: 'Sale was successfully updated.' }
         format.json { render :show, status: :ok, location: @sale }
       else
@@ -73,7 +75,21 @@ class SalesController < ApplicationController
       params.require(:sale).
         permit(:sales_date, :product_type, :stocking_price, :bonus_price, :cost,
           :selling_price, :fee, :shipping_cost, :sales, :profit, :profit_rate, :status, :remarks,
-          sale_products_attributes: [:product_id]
+          sale_products_attributes: [:stocking_product_id]
         )
+    end
+
+    def update_sale_params
+      params.require(:sale).
+        permit(:sales_date, :product_type, :stocking_price, :bonus_price, :cost,
+          :selling_price, :fee, :shipping_cost, :sales, :profit, :profit_rate, :status, :remarks,
+          sale_products_attributes: [:stocking_product_id, :_destroy, :id]
+        )
+    end
+
+    def update_stock(sale)
+      return unless @sale.status.売り切れ?
+      stocking_products = sale.sale_products.map { |sale_product| sale_product&.stocking_product&.id}
+      StockingProduct.where(id: stocking_products).update_all(stock: 0)
     end
 end

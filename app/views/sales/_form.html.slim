@@ -18,27 +18,11 @@
       - if sale_products_form.index == 0
         .col.m7
           = sale_products_form.label :body
-          = sale_products_form.collection_select :product_id, StockingProduct.joins(:product).where('products.type = ?', "Body"), :id, :product_name, include_blank: true
+          = sale_products_form.collection_select :stocking_product_id, StockingProduct.joins(:product).where('products.type = ?', "Body"), :id, :product_name, include_blank: true
       - else
         .col.m7
           = sale_products_form.label :lense
-          = sale_products_form.collection_select :product_id, StockingProduct.joins(:product).where('products.type = ?', "Lense"), :id, :product_name, include_blank: true
-
-
-
-
-  /.row
-    .col.m10
-      = f.label :body
-      = select_tag 'select_body', options_from_collection_for_select(StockingProduct.joins(:product).where('products.type = ?', "Body"), :id, :product_name), include_blank: true
-  /.row
-    .col.m10
-      = f.label :lense1
-      = select_tag 'select_lense1', options_from_collection_for_select(StockingProduct.joins(:product).where('products.type = ?', "Lense"), :id, :product_name), include_blank: true
-  /.row
-    .col.m10
-      = f.label :lense2
-      = select_tag 'select_lense2', options_from_collection_for_select(StockingProduct.joins(:product).where('products.type = ?', "Lense"), :id, :product_name), include_blank: true
+          = sale_products_form.collection_select :stocking_product_id, StockingProduct.joins(:product).where('products.type = ?', "Lense"), :id, :product_name, include_blank: true
   .row
     .col.m3
       = f.label :stocking_price

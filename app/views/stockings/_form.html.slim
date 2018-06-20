@@ -7,50 +7,50 @@
           li = message
 
   .row
-    .col.m4
+    .col.m3
       = f.label :purchase_date
       = f.date_field :purchase_date
-    .col.m4
+    .col.m3
       = f.label :product_type
       = f.select :product_type, Stocking.product_type.options
+    .col.m3
+      = f.label :payment_type
+      = f.select :payment_type, Stocking.payment_type.options
+    .col.m3
+      = f.label :purchase_place
+      = f.select :purchase_place, Stocking.purchase_place.options
 
   = f.fields_for :stocking_products do |stocking_products_form|
     .row
-      - if stocking_products_form.index == 0
-        .col.m4
+      - if stocking_products_form.index == 0 && stocking_products_form.object&.product&.type != "Lense"
+        .col.m5
           = stocking_products_form.label :body
           = stocking_products_form.collection_select :product_id, Body.all, :id, :product_name, include_blank: true
       - else
-        .col.m4
+        .col.m5
           = stocking_products_form.label :lense
           = stocking_products_form.collection_select :product_id, Lense.all, :id, :product_name, include_blank: true
 
-      .col.m4
+      .col.m2
         = stocking_products_form.label :estimated_price
         = stocking_products_form.number_field :estimated_price
-      .col.m4
+      .col.m1
         = stocking_products_form.label :stock
         = stocking_products_form.select :stock, StockingProduct.stock.options, include_blank: true
 
   .row
-    .col.m4
+    .col.m3
       = f.label :purchase_price
       = f.number_field :purchase_price
-    .col.m4
+    .col.m3
       = f.label :shipping_cost
       = f.number_field :shipping_cost
-    .col.m4
+    .col.m3
       = f.label :use_points
       = f.number_field :use_points
-    /.field
+    .col.m3
       = f.label :purchasing_cost
       = f.number_field :purchasing_cost
-    .col.m4
-      = f.label :payment_type
-      = f.select :payment_type, Stocking.payment_type.options
-    .col.m4
-      = f.label :purchase_place
-      = f.select :purchase_place, Stocking.purchase_place.options
   .row
     .col.m4
       = f.label :remarks

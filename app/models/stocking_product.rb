@@ -10,6 +10,6 @@ class StockingProduct < ApplicationRecord
   end
 
   def product_name
-    "#{stocking.purchase_date} / #{stocking.purchase_place} / #{stocking.product_type} / #{product.maker} / #{product.name} / #{estimated_price.to_s(:delimited)}"
+    "#{stocking.purchase_date} / #{stocking.purchase_place} / #{stocking.product_type} / #{product.maker} / #{product.name} / #{product.color} / #{estimated_price.to_s(:delimited)}"
   end
 end

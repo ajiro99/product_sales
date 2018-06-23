@@ -1,5 +1,13 @@
-h1 Listing sales
-
+h5 Listing sales
+span
+  b 原価合計：
+  = Sale.sum(:cost).to_s(:delimited)
+  b 売上合計：
+  = Sale.sum(:sales).to_s(:delimited)
+  b 利益合計：
+  = Sale.sum(:profit).to_s(:delimited)
+  b 利益率平均：
+  = Sale.average(:profit_rate).to_s(:delimited)
 table.striped
   thead
     tr

@@ -55,15 +55,15 @@ $(function() {
     lense2_price = 0
 
     if ($("#sale_sale_products_attributes_0_stocking_product_id option:selected").text() != "") {
-      body_price = parseInt($("#sale_sale_products_attributes_0_stocking_product_id option:selected").text().split('/')[5].replace(",", ""));
+      body_price = parseInt($("#sale_sale_products_attributes_0_stocking_product_id option:selected").text().split('/')[6].replace(",", ""));
     }
 
     if ($("#sale_sale_products_attributes_1_stocking_product_id option:selected").text() != "") {
-      lense1_price = parseInt($("#sale_sale_products_attributes_1_stocking_product_id option:selected").text().split('/')[5].replace(",", ""));
+      lense1_price = parseInt($("#sale_sale_products_attributes_1_stocking_product_id option:selected").text().split('/')[6].replace(",", ""));
     }
 
     if ($("#sale_sale_products_attributes_2_stocking_product_id option:selected").text() != "") {
-      lense2_price = parseInt($("#sale_sale_products_attributes_2_stocking_product_id option:selected").text().split('/')[5].replace(",", ""));
+      lense2_price = parseInt($("#sale_sale_products_attributes_2_stocking_product_id option:selected").text().split('/')[6].replace(",", ""));
     }
 
     $("#sale_stocking_price").val(body_price + lense1_price + lense2_price);

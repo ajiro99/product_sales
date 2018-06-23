@@ -1,5 +1,9 @@
 h5 Listing stockings
-
+span
+  b 利用ポイント合計：
+  = Stocking.sum(:use_points).to_s(:delimited)
+  b 仕入合計：
+  = Stocking.sum(:purchasing_cost).to_s(:delimited)
 table.striped
   thead
     tr

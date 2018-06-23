@@ -75,7 +75,7 @@ class StockingsController < ApplicationController
     def stocking_params
       params.require(:stocking).
         permit(:purchase_date, :product_type, :purchase_price, :shipping_cost,
-          :use_points, :payment_type, :purchase_place, :remarks,
+          :use_points, :purchasing_cost, :payment_type, :purchase_place, :remarks,
           stocking_products_attributes: [:product_id, :estimated_price, :stock]
         )
     end

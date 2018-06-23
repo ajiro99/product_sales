@@ -1,9 +1,12 @@
 h5 Listing stocking_products
-
+span
+  b 原価合計：
+  = StockingProduct.sum(:estimated_price).to_s(:delimited)
 table.striped
   thead
     tr
       th purchase_date
+      th stocking_type
       th product_type
       th maker
       th name
@@ -16,7 +19,8 @@ table.striped
     - @stocking_products.each do |stocking_product|
       tr
         td = stocking_product.stocking.purchase_date
-        td = stocking_product.product.type
+        td = stocking_product.stocking.product_type
+        td = stocking_product.product.type if stocking_product.stocking.product_type.レンズキット?
         td = stocking_product.product.maker
         td = stocking_product.product.name
         td = stocking_product.product.color

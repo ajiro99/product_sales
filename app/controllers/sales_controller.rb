@@ -20,6 +20,9 @@ class SalesController < ApplicationController
 
   # GET /sales/1/edit
   def edit
+    @sale = Sale.find(params[:id])
+    t = 3 - @sale.sale_products.size.to_i
+    t.times{ @sale.sale_products.build }
   end
 
   # POST /sales

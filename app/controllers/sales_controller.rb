@@ -4,7 +4,9 @@ class SalesController < ApplicationController
   # GET /sales
   # GET /sales.json
   def index
-    @sales = Sale.all
+    # @sales = Sale.all.order(:sales_date)
+    @q = Sale.ransack(params[:q])
+    @sales = @q.result.order(:sales_date)
   end
 
   # GET /sales/1
@@ -67,6 +69,11 @@ class SalesController < ApplicationController
     end
   end
 
+  def search
+    @q = Sale.search(search_params)
+    @sales = @q.result.order(:sales_date)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sale
@@ -94,5 +101,9 @@ class SalesController < ApplicationController
       return unless @sale.status.売り切れ?
       stocking_products = sale.sale_products.map { |sale_product| sale_product&.stocking_product&.id}
       StockingProduct.where(id: stocking_products).update_all(stock: 0)
+    end
+
+    def search_params
+      params.require(:q).permit!
     end
 end

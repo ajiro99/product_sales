@@ -4,7 +4,7 @@ class Sale < ApplicationRecord
 
   extend Enumerize
   enumerize :product_type, in: { レンズキット: 1, ボディ: 2, レンズ: 3, その他:0 }, scope: true
-  enumerize :status, in: { 販売予定: 1, 販売中: 2, 一時停止: 3, 売り切れ: 4, 削除:0 }, scope: true
+  enumerize :status, in: { 売り切れ: 4, 販売予定: 1, 販売中: 2, 一時停止: 3, 削除:0 }, scope: true
 
   def maker
     sale_products.first&.stocking_product&.product&.maker

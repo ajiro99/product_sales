@@ -21,11 +21,17 @@
       - if sale_products_form.index == 0 && sale_products_form.object&.stocking_product&.product&.type != "Lense"
         .col.m9
           = sale_products_form.label :body
-          = sale_products_form.collection_select :stocking_product_id, StockingProduct.joins(:product).where('products.type = ?', "Body"), :id, :product_name, include_blank: true
+          - if controller.action_name == 'new'
+            = sale_products_form.collection_select :stocking_product_id, StockingProduct.joins(:product).where('products.type = ?', "Body").with_stock(:在庫あり), :id, :product_name, include_blank: true
+          - else
+            = sale_products_form.collection_select :stocking_product_id, StockingProduct.joins(:product).where('products.type = ?', "Body"), :id, :product_name, include_blank: true
       - else
         .col.m9
           = sale_products_form.label :lense
-          = sale_products_form.collection_select :stocking_product_id, StockingProduct.joins(:product).where('products.type = ?', "Lense"), :id, :product_name, include_blank: true
+          - if controller.action_name == 'new'
+            = sale_products_form.collection_select :stocking_product_id, StockingProduct.joins(:product).where('products.type = ?', "Lense").with_stock(:在庫あり), :id, :product_name, include_blank: true
+          - else
+            = sale_products_form.collection_select :stocking_product_id, StockingProduct.joins(:product).where('products.type = ?', "Lense"), :id, :product_name, include_blank: true
   .row
     .col.m3
       = f.label :stocking_price

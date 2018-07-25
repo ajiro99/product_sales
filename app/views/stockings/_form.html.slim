@@ -25,11 +25,11 @@
       - if stocking_products_form.index == 0 && stocking_products_form.object&.product&.type != "Lense"
         .col.m5
           = stocking_products_form.label :body
-          = stocking_products_form.collection_select :product_id, Body.all, :id, :product_name, include_blank: true
+          = stocking_products_form.collection_select :product_id, Body.all.order(:maker), :id, :product_name, include_blank: true
       - else
         .col.m5
           = stocking_products_form.label :lense
-          = stocking_products_form.collection_select :product_id, Lense.all, :id, :product_name, include_blank: true
+          = stocking_products_form.collection_select :product_id, Lense.all.order(:maker), :id, :product_name, include_blank: true
 
       .col.m2
         = stocking_products_form.label :estimated_price

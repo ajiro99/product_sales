@@ -4,7 +4,7 @@ class StockingsController < ApplicationController
   # GET /stockings
   # GET /stockings.json
   def index
-    @stockings = Stocking.all
+    @stockings = Stocking.all.order(:purchase_date)
   end
 
   # GET /stockings/1

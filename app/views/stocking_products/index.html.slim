@@ -1,7 +1,8 @@
-h5 Listing stocking_products
+h5 在庫一覧
 span
   b 原価合計：
-  = StockingProduct.sum(:estimated_price).to_s(:delimited)
+  = @stocking_products.sum_estimated_price
+  span = @stocking_products.stock_count
 table.striped
   thead
     tr
@@ -26,4 +27,4 @@ table.striped
         td = stocking_product.product.color
         td.right-align = stocking_product.estimated_price&.to_s(:delimited)
         td = stocking_product.stocking.purchase_place
-        td = stocking_product.stock
+        td = stocking_product.stock_decorate

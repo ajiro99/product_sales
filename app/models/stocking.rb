@@ -5,7 +5,7 @@ class Stocking < ApplicationRecord
   extend Enumerize
   enumerize :product_type, in: { レンズキット: 1, ボディ: 2, レンズ: 3, その他:0 }, scope: true
   enumerize :payment_type, in: { Yahoo: 1, P_One: 2, Amex: 3, 現金:0 }, scope: true
-  enumerize :purchase_place, in: { ヤフオク: 1, メルカリ: 2, ソフマップ: 20, ハードオフ:21, アキバU_shop:22 }, scope: true
+  enumerize :purchase_place, in: { ヤフオク: 1, メルカリ: 2, ソフマップ: 20, ハードオフ:21, アキバU_shop:22, キタムラ:23 }, scope: true
 
   def maker
     stocking_products.first&.product&.maker

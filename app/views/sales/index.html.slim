@@ -1,36 +1,53 @@
-h5 Listing sales
-span
-  b 原価合計：
-  = Sale.sum(:cost).to_s(:delimited)
-  b 売上合計：
-  = Sale.sum(:sales).to_s(:delimited)
-  b 利益合計：
-  = Sale.sum(:profit).to_s(:delimited)
-  b 利益率平均：
-  = Sale.average(:profit_rate).to_s(:delimited)
+h5 売上一覧
+
+= render 'search_form'
+
+.right-align
+  span
+    = link_to 'New Sale', new_sale_path, class: 'waves-effect waves-light btn white-text'
+
 table.striped
   thead
     tr
-      th Sales date
-      th Product type
-      th Maker
-      th Product name
-      th Stocking price
-      th Bonus price
-      th Cost
-      th Selling price
-      th Fee
-      th Shipping cost
-      th Sales
-      th Profit
-      th Profit rate
-      th Status
-      th Remarks
+      th = sort_link(@q, :sales_date)
+      th = sort_link(@q, :product_type)
+      th = sort_link(@q, :maker)
+      th = sort_link(@q, :product_name)
+      th = sort_link(@q, :stocking_price)
+      th = sort_link(@q, :bonus_price)
+      th = sort_link(@q, :cost)
+      th = sort_link(@q, :selling_price)
+      th = sort_link(@q, :fee)
+      th = sort_link(@q, :shipping_cost)
+      th = sort_link(@q, :sales)
+      th = sort_link(@q, :profit)
+      th = sort_link(@q, :profit_rate)
+      th = sort_link(@q, :status)
+      th = sort_link(@q, :remarks)
       th
       th
       th
 
   tbody
+    tr
+      td
+      td
+      td
+      td
+      td.right-align = @sales.sum(:stocking_price).to_s(:delimited)
+      td.right-align = @sales.sum(:bonus_price).to_s(:delimited)
+      td.right-align.blue-text = @sales.sum(:cost).to_s(:delimited)
+      td.right-align = @sales.sum(:selling_price).to_s(:delimited)
+      td.right-align = @sales.sum(:fee).to_s(:delimited)
+      td.right-align = @sales.sum(:shipping_cost).to_s(:delimited)
+      td.right-align.blue-text = @sales.sum(:sales).to_s(:delimited)
+      td.right-align.red-text = @sales.sum(:profit).to_s(:delimited)
+      td.right-align.red-text = @sales.average(:profit_rate)&.round(2)&.to_s(:delimited)
+      td
+      td
+      td
+      td
+      td
     - @sales.each do |sale|
       tr
         td = sale.sales_date
@@ -54,4 +71,4 @@ table.striped
 
 br
 
-= link_to 'New Sale', new_sale_path
+= link_to 'New Sale', new_sale_path, class: 'waves-effect waves-light btn white-text'
